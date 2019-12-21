@@ -30,6 +30,8 @@ def BattleShips():
         print("You won")
     else:
         print("You lost")
+    
+    input("Game Over")
 
 
 BattleShips()
