@@ -10,28 +10,26 @@ def BattleShips():
         "Submarine": 3,
         "Destroyer": 2,
     }
-
     computer_board = GameBoard(size=board_length)
-
     player_board = GameBoard(size=board_length)
+    computer_board.add_ships_randomly(ships)
+    player_board.add_ships_manually(ships)
 
-    computer_board.AddComputerShips(ships)
+    auto_play = input("If you want to turn on auto play, write: ""(Y)ES""")
+    while not (computer_board.has_lost() or player_board.has_lost()):
+        computer_board.print_board()
+        player_board.print_board(show_ships=True)
+        computer_board.manual_shot(auto_play)
+        if computer_board.has_lost():
+            break
+        player_board.random_shot("computer")
 
-    player_board.AddUserShips(ships)
-    auto_play = input("If you want to turn on autoplay, write: " "(Y)ES" "")
-    while not (computer_board.HasLost() or player_board.HasLost()):
-        computer_board.PrintBoard()
-        player_board.PrintBoard(show_ships=True)
-        player_board.UserShot(auto_play)
-        computer_board.ComputerShot("computer")
-    print(player_board.HasLost())
-    print(computer_board.HasLost())
-    if computer_board.HasLost():
+    if computer_board.has_lost():
         print("You won")
     else:
         print("You lost")
-    
-    input("Game Over")
+
+    print("Game Over")
 
 
 BattleShips()
